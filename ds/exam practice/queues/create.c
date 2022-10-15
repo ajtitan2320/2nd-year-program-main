@@ -41,6 +41,7 @@ void disp(queue q1){
 }
 int main()
 {
+
     queue q1;
     int s;
     printf("enter the size = ");
