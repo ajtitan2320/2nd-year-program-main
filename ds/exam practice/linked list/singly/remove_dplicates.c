@@ -22,6 +22,25 @@ void insert_at_beginning(int data){
         }
     }
 }
+void rem(){
+    node* p2 = NULL;
+    node* p1 = head;
+    while(p1!=NULL && p1->next!=NULL){
+        p2=p1;
+        while(p2->next!=NULL){
+            if(p1->data==p2->next->data){
+                node* temp = p1->next;
+                p1->next = p2->next->next;
+                free(temp);
+            }
+            else{
+                p2 = p2->next;
+            }
+        }
+        p1 = p1->next;
+    }
+    
+}
 void print(){
     node* temp = head;
     while(temp!=NULL){
@@ -33,9 +52,12 @@ int main()
 {
     insert_at_beginning(5);
     insert_at_beginning(4);
-    insert_at_beginning(3);
-    insert_at_beginning(2);
-    insert_at_beginning(1);
+    insert_at_beginning(4);
+    insert_at_beginning(4);
+    insert_at_beginning(4);
+    print();
+    printf("\n");
+    rem();
     print();
     return 0;
 }

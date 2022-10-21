@@ -5,7 +5,7 @@ typedef struct nde{
     struct nde* next;
 }node;
 node *head = NULL;
-void insert_at_end(int data){
+void insert_at_beginning(int data){
     node* temp = (node*)malloc(sizeof(node));
     if(temp==NULL){
         printf("Not Enough Memory");
@@ -17,15 +17,22 @@ void insert_at_end(int data){
             head = temp;
         }
         else{
-            node* temp1 = head;
-            while(temp1->next!=NULL)
-            {
-                temp1 = temp1->next;
-            }
-            temp1->next = temp;
-            temp->next = NULL;
+            temp->next = head;
+            head = temp;
         }
     }
+}
+void reverse(){
+    node* prev = NULL;
+    node* curr = head;
+    node* forw = NULL;
+    while(curr!=NULL){
+        forw = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = forw;
+    }
+    head = prev;
 }
 void print(){
     node* temp = head;
@@ -36,11 +43,14 @@ void print(){
 }
 int main()
 {
-    insert_at_end(5);
-    insert_at_end(4);
-    insert_at_end(3);
-    insert_at_end(2);
-    insert_at_end(1);
+    insert_at_beginning(5);
+    insert_at_beginning(4);
+    insert_at_beginning(3);
+    insert_at_beginning(2);
+    insert_at_beginning(1);
+    print();
+    printf("\n");
+    reverse();
     print();
     return 0;
 }

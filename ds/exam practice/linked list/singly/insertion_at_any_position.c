@@ -7,35 +7,43 @@ struct node{
 struct node* head = NULL;
 void AnyPosition(int data,int pos){
     struct node* temp = (struct node* )malloc(sizeof(struct node));
-    int c = 0;
-    struct node* s = head;
-    struct node* s1;
-    struct node* s2;
-    int si = 1;
-    s2=head;
-    while(s2->next!=NULL){
-        si++;
-        s2 = s2->next;
-    }
-    if(pos==1){
-        temp->data = data;
-        temp->next = head;
-        head = temp;
-    }
-    else if(pos==si){
-        temp->data = data;
-        s2->next = temp;
-        temp->next = NULL;
+    if(head==NULL){
+        if(pos==1){
+            temp->data = data;
+            temp->next = NULL;
+            head=temp;
+        }
     }
     else{
-        while(c<pos-1){
-        c++;
-        s1 = s;
-        s = s->next;
-    }
-    temp->data = data;
-    temp->next = s;
-    s1->next = temp;
+        int ct = 0;
+        struct node* s = head;
+        while(s!=NULL){
+            ct++;
+            s = s->next;
+        }
+        temp->data = data;
+        if(pos==1){
+            temp->next = head;
+            head=temp;
+        }
+        else if(pos==ct+1){
+            struct node* temp1 = head;
+            while(temp1->next!=NULL){
+                temp1 = temp1->next;
+            }
+            temp1->next = temp;
+            temp->next = NULL;
+        }
+        else{
+            struct node* s1 = head;
+            int c=1;
+            while(c<pos-1){
+                c++;
+                s1 = s1->next;
+            }
+            temp->next = s1->next;
+            s1->next = temp;
+        }
     }
 }
 void insertion(int data){
