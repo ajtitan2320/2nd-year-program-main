@@ -4,54 +4,51 @@ typedef struct{
     int size;
     int front;
     int rear;
-    int *q;
+    int *arr;
 }queue;
-void create(queue* q1,int size){
-    q1->size = size;
-    q1->q = (int *)malloc(sizeof(int)*q1->size);
-    q1->front = q1->rear = -1;
+void create(queue *q,int size){
+    q->size = size;
+    q->front = -1;
+    q->rear = -1;
+    q->arr = (int *)malloc(sizeof(int)*q->size);
 }
-void enqueue(queue* q1,int data){
-    if(q1->rear == q1->size){
-        printf("stack overflow");
+void insertion(queue* q,int data){
+    if(q->rear==q->size){
+        printf("overflow");
     }
     else{
-        q1->rear++;
-        q1->q[q1->rear] = data;
+        q->rear++;
+        q->arr[q->rear]=data;
     }
 }
-void dequeue(queue* q1){
-    if(q1->rear == q1->front){
-        printf("stack underflow");
+void deletion(queue* q){
+    if(q->front==q->rear){
+        printf("overflow");
     }
     else{
-        q1->front++;
+        q->front++;
     }
 }
-void disp(queue q1){
-    if(q1.front == q1.rear){
-        printf("stack underflow");
-    }
-    else{
-        while(q1.front!=q1.rear){
-            q1.front++;
-            printf("%d ",q1.q[q1.front]);
-        }
+void print(queue q){
+    while(q.front!=q.rear ){
+        q.front++;
+        printf("%d ",q.arr[q.front]);
     }
 }
 int main()
 {
-
-    queue q1;
-    int s;
-    printf("enter the size = ");
-    scanf("%d",&s);
-    create(&q1,s);
-    enqueue(&q1,3);
-    enqueue(&q1,4);
-    enqueue(&q1,5);
-    enqueue(&q1,6);
-    dequeue(&q1);
-    disp(q1);
+    queue q;
+    int size;
+    scanf("%d",&size);
+    create(&q,size);
+    insertion(&q,1);
+    insertion(&q,2);
+    insertion(&q,3);
+    insertion(&q,4);
+    insertion(&q,5);
+    insertion(&q,6);
+    print(q);
+    deletion(&q);
+    print(q);
     return 0;
 }

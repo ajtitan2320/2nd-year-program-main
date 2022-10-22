@@ -52,7 +52,7 @@ int main()
 {
     insert_at_beginning(5);
     insert_at_beginning(4);
-    insert_at_beginning(4);
+    insert_at_beginning(2);
     insert_at_beginning(4);
     insert_at_beginning(4);
     print();

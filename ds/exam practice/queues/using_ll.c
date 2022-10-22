@@ -1,56 +1,59 @@
-#include<stdio.h>
-#include<stdlib.h>
-struct node{
+#include <stdio.h>
+#include <stdlib.h>
+typedef struct nde
+{
     int data;
-    struct node* next;
-};
-struct node* front = NULL;
-struct node* rear = NULL;
-void enqueue(int data){
-    struct node* q;
-    q = (struct node* )malloc(sizeof(struct node*));
-    if(q==NULL){
-        printf("Queue Is Full");
+    struct nde *next;
+} node;
+node *front = NULL;
+node *rear = NULL;
+void insertion(int data)
+{
+    node *q = (node *)malloc(sizeof(node));
+    if (q == NULL)
+    {
+        printf("queue is full");
     }
-    else{
+    else
+    {
         q->data = data;
         q->next = NULL;
-        if(front == NULL){
-            front = rear = q;
+        if (rear == NULL)
+        {
+            rear = front = q;
         }
-        else{
+        else
+        {
             rear->next = q;
             rear = q;
         }
     }
 }
-void dequeue(){
-    if(front == NULL){
+void deletion(){
+    if(front==NULL){
         printf("underflow");
     }
     else{
-        struct node* t = front;
+        node* temp = front;
         front = front->next;
-        free(t);
+        free(temp);
     }
 }
 void print(){
-    struct node* temp = front;
+    node* temp = front;
     while(temp!=NULL){
         printf("%d ",temp->data);
-        temp = temp->next;
+        temp=temp->next;
     }
 }
 int main()
 {
-    enqueue(1);
-    enqueue(2);
-    enqueue(3);
-    enqueue(4);
-    enqueue(5);
+    insertion(1);
+    insertion(2);
+    insertion(3);
+    insertion(4);
     print();
-    dequeue();
+    deletion();
     print();
-
     return 0;
 }
